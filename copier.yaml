@@ -1,3 +1,7 @@
+# Configurations
+_subdirectory: template
+_answers_file: .copier_answers.yml
+
 # questions
 project_name:
     type: str
