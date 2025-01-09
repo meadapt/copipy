@@ -16,9 +16,9 @@ Before using this template, ensure you have the following:
 
 Run the `copier copy` command to create your new Python project:
 
-    ```bash
-    $ copier copy gh:meadapt/copipy destination-folder
-    ```
+```bash
+$ copier copy gh:meadapt/copipy destination-folder
+```
 
 Follow the prompts provided by [Copier](https://copier.readthedocs.io/en/stable/) to customize your new Python project.
 The `copier copy` command works similarly to `git clone`, but instead of cloning the template repository as-is, it creates a new folder (specified as `destination-folder`) and populates it with a fully personalized file structure based on your answers.
@@ -28,7 +28,7 @@ Replace `destination-folder` with the path where you'd like to create your proje
 ## Features
 
 - Pre-configured tools for linting, testing, and formatting.
-- Git initialized and ready to use right out of the box.
+-   Git initialized and ready to use right out of the box.
 - Easy-to-follow structure for Python projects.
 - Customizable settings to fit your needs.
 
