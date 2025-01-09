@@ -1,5 +1,7 @@
 # Copipy - Python Project Template
 
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-purple.json)](https://github.com/copier-org/copier)
+
 Welcome to **[copipy](https://github.com/meadapt/copipy)**, a Python project template powered by the [Copier library](https://copier.readthedocs.io/en/stable/)!
 This template helps you kickstart your Python projects with best practices and pre-configured tools.
 
