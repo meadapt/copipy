@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "copipy"
+package-mode = false
+version = "0.1.0"
+description = ""
+authors = ["Gabriel Dornas <gabrielbdornas@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
