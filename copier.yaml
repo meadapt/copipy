@@ -1,12 +1,55 @@
 # Configurations
 _subdirectory: template
 _answers_file: .copier_answers.yml
+_jinja_extensions:
+    - cookiecutter.extensions.SlugifyExtension
 
-# questions
 project_name:
     type: str
-    help: What is your project name?
+    placeholder: My new Python project
+    help: |
+        An awesome project needs an awesome name. Tell me yours.
+           Here, you can use capital letters, digits, underscores, hyphens, and other characters.
+           This name will be used, for example, in the title of your README.md file.
+           We recommend keeping it short, simple, and meaningful.
+           Short names are easier to understand, maintain, and use as your project evolves.
+           If you're having difficulty coming up with a great name that meets these criteria, why not ask chatGPT for help.
+
+change_project_dir_name:
+    type: str
+    help: |
+        Isn't {{ project_name | slugify }} perfect for the project's directory name?
+           Why we're suggestin this name?
+           Convention Over configuration.
+           In this case the conventions are:
+             - lowercase letters to maintain consistency across operating systems.
+             - Separate words with hyphens (`-`) for better readability and compatibility with command-line tools.
+             - Keep it short and descriptive to make paths easier to type and understand.
+             - Avoid special characters like `@`, `#`, `$`, or `&`. Stick to letters, numbers, and hyphens.
+             - Choose a name that reflects your project's purpose or functionality.
+           Would you like to change it?
+    choices:
+        No, thanks: "no"
+        Yes, please: "yes"
+
+project_dir_name:
+    type: str
+    placeholder: python-project
+    help: |
+        What's your project directory name?
+    default: |-
+        {% if change_project_dir_name == 'no' -%}
+            {{ project_name | slugify }}
+        {%- else -%}
+            {#- Ask user -#}
+        {%- endif %}
+    when: "{{ change_project_dir_name != 'no' }}"
+    validator: >-
+        {% if not (project_dir_name | regex_search('^[a-z0-9\-]+$')) %}
+        The project_dir_name must contains lowercase letters, digits or hyphens.
+        {% endif %}
 
 module_name:
     type: str
     help: What is your Python module name?
+    default: "{{ project_name | slugify }}"
