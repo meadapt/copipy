@@ -1,0 +1,30 @@
+name: Issue Template MeAdapt
+description: The main goal of this template is to standardize the creation of issues within the MeAdapt organization and the Copipy repository.
+projects:
+  - meadapt/2
+body:
+  - type: markdown
+    attributes:
+      value: |
+        When creating this issue, don't forget to:
+        - Provide as many details as possible. Think about how you will need to understand what is being proposed today without difficulties in the future.
+        - Enrich the issue's metadata as much as possible:
+          - Select labels whenever necessary.
+          - If you are a GitHub member of the MeAdapt organization:
+            - This template automatically sets the issue's status to **Backlog** in the [Board planner](https://github.com/orgs/meadapt/projects/2). Reflect on this and update the information if needed.
+            - Configure all relevant fields in the [Board planner](https://github.com/orgs/meadapt/projects/2).
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        Provide as many details as possible for your issue.
+        If applicable, list all tasks and/or fixes required before closing the issue.
+      value: |
+
+
+        ### List of tasks and/or fixes
+
+        - [ ] Task/Fix 1
+        - [ ] Task/Fix 2
+        - [ ] Task/Fix 3
