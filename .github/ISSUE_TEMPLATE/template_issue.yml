@@ -1,5 +1,5 @@
 name: Issue Template MeAdapt
-description: The main goal of this template is to standardize the creation of issues within the MeAdapt organization and the Copipy repository.
+description: The main goal of this template is to standardize the creation of issues within the Copipy repository.
 projects:
   - meadapt/2
 body:
