@@ -22,6 +22,6 @@ jobs:
         uses: JasonEtco/create-an-issue@v2
         if: failure()
         env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           filename: .github/poetry_update_actions_failure.md
