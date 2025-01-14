@@ -12,14 +12,15 @@ Before using this template, ensure you have the following:
 1. Git 2.27+ installed.
 1. Python 3.9+ installed.
 1. [pipx installed](https://pipx.pypa.io/stable/installation/).
-1. [Copier installed via pipx](https://copier.readthedocs.io/en/stable/#installation)
+1. [Copier installed via pipx](https://copier.readthedocs.io/en/stable/#installation).
+1. [Cookiecutter install alongside Copier](https://copier.readthedocs.io/en/stable/configuring/#jinja_extensions) using the command `pipx inject copier cookiecutter`.
 
 ## Getting Started
 
 Run the `copier copy` command to create your new Python project:
 
 ```bash
-$ copier copy gh:meadapt/copipy destination-folder
+$ copier copy --trust gh:meadapt/copipy destination-folder
 ```
 
 Follow the prompts provided by [Copier](https://copier.readthedocs.io/en/stable/) to customize your new Python project.
