@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update Python packages
-        uses: Apakottur/action-poetry-package-update@v1
+        uses: fuzzylabs/gha-poetry-update@v1
         with:
           base-branch: main
       - name: Run tests
