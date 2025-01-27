@@ -1,4 +1,3 @@
-from pathlib import Path
 import pytest
 
 
@@ -69,4 +68,3 @@ def test_project_dir_name_slugify(copie,
     project_dir_path = project_dir(project)
 
     assert project_dir_path[1].stem == project_dir_name
-
