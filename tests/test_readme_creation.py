@@ -1,0 +1,44 @@
+from tests.conftest import project_dir
+
+import pytest
+
+def test_readme_md_creation(copie, copier_project_defaults):
+    """
+    Test new project creation with README.md file.
+    """
+
+    project_defaults = copier_project_defaults
+    project = copie.copy(extra_answers=project_defaults)
+    _project_dir = project_dir(project)
+    project_path_structure = _project_dir[3]
+
+    assert 'README.md' in project_path_structure
+
+@pytest.mark.parametrize('project_name', [
+    ('1Meu Lindo Projeto'),
+    ('MEU LINDO PROJETO'),
+    ('meu-lindo-projeto'),
+    ('meu_lindo_projeto'),
+    ('Python Copier COM Café'),
+    ('PYTHON COPIER COM VOCÊ'),
+    ('PYTHON copier com fumaça'),
+    ('copier à Grega'),
+    ('copier_à_Grega'),
+    ('copier___à_ Grega'),
+    ('copipy'),
+    ('COPIPY'),
+    ('Copipy'),
+])
+def test_readme_me_content(copie,
+                          copier_project_defaults, project_name):
+
+    copier_project_defaults['project_name'] = project_name
+    project_defaults = copier_project_defaults
+    project = copie.copy(extra_answers=project_defaults)
+    _project_dir = project_dir(project)
+    project_path = _project_dir[2]
+
+    readme_path = project_path / 'README.md'
+    readme_content = readme_path.read_text(encoding='utf-8')
+
+    assert readme_content == f"## {project_name}\n"

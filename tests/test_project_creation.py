@@ -1,14 +1,6 @@
+from tests.conftest import project_dir
+
 import pytest
-
-
-def project_dir(project):
-    """
-    Return new project dir structure (ls -la) and Path.
-    """
-
-    project_dir_structure = [folder for folder in project.project_dir.glob('*')]
-    project_dir_path = project_dir_structure[0]
-    return project_dir_structure, project_dir_path
 
 
 def test_project_dir_creation(copie, copier_project_defaults):
@@ -17,13 +9,15 @@ def test_project_dir_creation(copie, copier_project_defaults):
     """
     project_defaults = copier_project_defaults
     project = copie.copy(extra_answers=project_defaults)
-    project_dir_path = project_dir(project)
+    _project_dir = project_dir(project)
+    project_parent_dir_structure = _project_dir[1]
+    project_path = _project_dir[2]
 
     assert project.exit_code == 0
     assert project.exception is None
-    assert len(project_dir_path[0]) == 1
-    assert project_dir_path[1].is_dir()
-    assert project_dir_path[1].stem == 'test-copier'
+    assert len(project_parent_dir_structure) == 1
+    assert project_path.is_dir()
+    assert project_path.stem == 'test-copier'
 
 
 @pytest.mark.parametrize('project_name, project_dir_name', [
@@ -52,6 +46,8 @@ def test_project_dir_name_slugify(copie,
     copier_project_defaults['project_name'] = project_name
     project_defaults = copier_project_defaults
     project = copie.copy(extra_answers=project_defaults)
-    project_dir_path = project_dir(project)
 
-    assert project_dir_path[1].stem == project_dir_name
+    _project_dir = project_dir(project)
+    project_path = _project_dir[2]
+
+    assert project_path.stem == project_dir_name
