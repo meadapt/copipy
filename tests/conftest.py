@@ -14,6 +14,19 @@ def copier_project_defaults():
         }
 
 
+@pytest.fixture
+def create_project(copie, copier_project_defaults):
+    """
+    Fixture to create a project using the copier tool.
+    """
+    def _create_project(overrides=None):
+        # Allow overriding defaults
+        answers = {**copier_project_defaults, **(overrides or {})}
+        return copie.copy(extra_answers=answers)
+
+    return _create_project
+
+
 def project_dir(project):
     """
     Return new project dir structure (ls -la) and Path.

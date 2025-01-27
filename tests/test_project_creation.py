@@ -3,12 +3,11 @@ from tests.conftest import project_dir
 import pytest
 
 
-def test_project_dir_creation(copie, copier_project_defaults):
+def test_project_dir_creation(create_project):
     """
     Test new project creation in general.
     """
-    project_defaults = copier_project_defaults
-    project = copie.copy(extra_answers=project_defaults)
+    project = create_project()
     _project_dir = project_dir(project)
     project_parent_dir_structure = _project_dir[1]
     project_path = _project_dir[2]
@@ -35,18 +34,14 @@ def test_project_dir_creation(copie, copier_project_defaults):
     ('COPIPY', 'copipy'),
     ('Copipy', 'copipy'),
 ])
-def test_project_dir_name_slugify(copie,
-                          copier_project_defaults, project_name, project_dir_name):
+def test_project_dir_name_slugify(create_project, project_name, project_dir_name):
     """
     Test new project directory name and the slugify process.
     The `project_dir_name` variable must contains lowercase letters, digits or hyphens.
     If the  `change_project_dir_name` is 'no' it must use the  `slugify` filter provided by the
     `cookiecutter.extensions.SlugifyExtension` Jinja extension.
     """
-    copier_project_defaults['project_name'] = project_name
-    project_defaults = copier_project_defaults
-    project = copie.copy(extra_answers=project_defaults)
-
+    project = create_project(overrides={'project_name': project_name})
     _project_dir = project_dir(project)
     project_path = _project_dir[2]
 

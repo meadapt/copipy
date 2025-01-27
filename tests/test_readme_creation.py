@@ -2,13 +2,12 @@ from tests.conftest import project_dir
 
 import pytest
 
-def test_readme_md_creation(copie, copier_project_defaults):
+def test_readme_md_creation(create_project):
     """
     Test new project creation with README.md file.
     """
 
-    project_defaults = copier_project_defaults
-    project = copie.copy(extra_answers=project_defaults)
+    project = create_project()
     _project_dir = project_dir(project)
     project_path_structure = _project_dir[3]
 
@@ -29,12 +28,9 @@ def test_readme_md_creation(copie, copier_project_defaults):
     ('COPIPY'),
     ('Copipy'),
 ])
-def test_readme_me_content(copie,
-                          copier_project_defaults, project_name):
+def test_readme_me_content(create_project, project_name):
 
-    copier_project_defaults['project_name'] = project_name
-    project_defaults = copier_project_defaults
-    project = copie.copy(extra_answers=project_defaults)
+    project = create_project(overrides={'project_name': project_name})
     _project_dir = project_dir(project)
     project_path = _project_dir[2]
 
