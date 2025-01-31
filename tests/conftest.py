@@ -8,9 +8,9 @@ def copier_project_defaults():
     """
 
     return {
-            'project_name': 'test_copier',
-            'module_name': 'test_module',
+            'project_name': 'New Python project',
             'change_project_dir_name': 'no',
+            'change_project_scripts_dir_name': 'no',
         }
 
 

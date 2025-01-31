@@ -16,7 +16,7 @@ def test_project_dir_creation(create_project):
     assert project.exception is None
     assert len(project_parent_dir_structure) == 1
     assert project_path.is_dir()
-    assert project_path.stem == 'test-copier'
+    assert project_path.stem == 'new-python-project'
 
 
 @pytest.mark.parametrize('project_name, project_dir_name', [
