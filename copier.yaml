@@ -6,7 +6,7 @@ _jinja_extensions:
 
 project_name:
     type: str
-    placeholder: My new Python project
+    placeholder: New Python project
     help: |
         An awesome project needs an awesome name. Tell me yours.
            Here, you can use capital letters, digits, underscores, hyphens, and other characters.
@@ -20,7 +20,7 @@ change_project_dir_name:
     help: |
         Isn't {{ project_name | slugify }} perfect for the project's directory name?
            Why we're suggestin this name?
-           Convention Over configuration.
+           Convention over configuration.
            In this case the conventions are:
              - lowercase letters to maintain consistency across operating systems.
              - Separate words with hyphens (`-`) for better readability and compatibility with command-line tools.
@@ -34,7 +34,7 @@ change_project_dir_name:
 
 project_dir_name:
     type: str
-    placeholder: python-project
+    placeholder: new-python-project
     help: |
         What's your project directory name?
     default: |-
@@ -49,15 +49,15 @@ project_dir_name:
         The project_dir_name must contains lowercase letters, digits or hyphens.
         {% endif %}
 
-change_project_scripts_name:
+change_project_scripts_dir_name:
     type: str
     help: |
         Isn't {{ project_dir_name.replace('-', '_') }} perfect for the project script's directory name?
            Why we're suggestin this name?
-           Convention Over configuration.
+           Convention over configuration.
            In this case the conventions are:
              - lowercase letters to maintain consistency across operating systems.
-             - Separate words with underscore (`_`) for consistency and compatibility with Python. In Python, hyphens are not allowed in module or package names, which can lead to import errors and execution issues.
+             - Separate words with underscore (`_`) for Python compatibility. In Python, hyphens are not allowed in module or package names, which can lead to import errors and execution issues.
              - Keep it short and descriptive to make paths easier to type and understand.
              - Avoid special characters like `@`, `#`, `$`, or `&`. Stick to letters, numbers, and hyphens.
              - A name that reflects your project's directory name.
@@ -66,7 +66,36 @@ change_project_scripts_name:
         No, thanks: "no"
         Yes, please: "yes"
 
-module_name:
+common_scripts_dir_name:
     type: str
-    help: What is your Python module name?
-    default: "{{ project_name | slugify }}"
+    help: |
+        Would you like to use a common directory name for your scripts, such as src, scripts, bin, or utils?
+           These names are widely used in Python projects for organizing source code and utility scripts.
+           You can select one of these or specify your own preferred directory name.
+    choices:
+      bin: "bin"
+      scripts: "scripts"
+      src: "src"
+      utils: "utils"
+      No, I want to specify my own name: "no"
+    when: "{{ change_project_scripts_dir_name == 'yes' }}"
+
+
+project_scripts_dir_name:
+    type: str
+    placeholder: python_project
+    help: |
+        What's your script's directory name?
+    default: |-
+        {% if change_project_scripts_dir_name == 'no' -%}
+            {{ project_dir_name.replace('-', '_') }}
+        {% elif common_scripts_dir_name != 'no' -%}
+            {{ common_scripts_dir_name }}
+        {%- else -%}
+            {#- Ask user -#}
+        {%- endif %}
+    when: "{{ common_scripts_dir_name == 'no' }}"
+    validator: >-
+        {% if not (project_scripts_dir_name | regex_search('^[a-z0-9\_]+$')) %}
+        The project_scripts_dir_name must contains lowercase letters, digits or underscore.
+        {% endif %}
