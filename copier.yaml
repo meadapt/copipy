@@ -49,6 +49,23 @@ project_dir_name:
         The project_dir_name must contains lowercase letters, digits or hyphens.
         {% endif %}
 
+change_project_scripts_name:
+    type: str
+    help: |
+        Isn't {{ project_dir_name.replace('-', '_') }} perfect for the project script's directory name?
+           Why we're suggestin this name?
+           Convention Over configuration.
+           In this case the conventions are:
+             - lowercase letters to maintain consistency across operating systems.
+             - Separate words with underscore (`_`) for consistency and compatibility with Python. In Python, hyphens are not allowed in module or package names, which can lead to import errors and execution issues.
+             - Keep it short and descriptive to make paths easier to type and understand.
+             - Avoid special characters like `@`, `#`, `$`, or `&`. Stick to letters, numbers, and hyphens.
+             - A name that reflects your project's directory name.
+           Would you like to change it?
+    choices:
+        No, thanks: "no"
+        Yes, please: "yes"
+
 module_name:
     type: str
     help: What is your Python module name?
