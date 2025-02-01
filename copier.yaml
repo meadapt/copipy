@@ -14,6 +14,10 @@ project_name:
            We recommend keeping it short, simple, and meaningful.
            Short names are easier to understand, maintain, and use as your project evolves.
            If you're having difficulty coming up with a great name that meets these criteria, why not ask chatGPT for help.
+    validator: >-
+      {% if not (project_name | regex_search('.+')) %}
+      The project_name must be filled.
+      {% endif %}
 
 change_project_dir_name:
     type: str
