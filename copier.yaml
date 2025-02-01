@@ -8,21 +8,26 @@ project_name:
     type: str
     placeholder: New Python project
     help: |
-        An awesome project needs an awesome name. Tell me yours.
+        What's your project name?
+
+           An awesome project needs an awesome name.
            Here, you can use capital letters, digits, underscores, hyphens, and other characters.
            This name will be used, for example, in the title of your README.md file.
            We recommend keeping it short, simple, and meaningful.
-           Short names are easier to understand, maintain, and use as your project evolves.
-           If you're having difficulty coming up with a great name that meets these criteria, why not ask chatGPT for help.
+           Short names are easier to understand and use as your project evolves.
+           If you're having difficulty coming up with a name that meets these criteria,
+           why not ask chatGPT for help.
     validator: >-
       {% if not (project_name | regex_search('.+')) %}
       The project_name must be filled.
       {% endif %}
 
-change_project_dir_name:
+keep_project_dir_name:
     type: str
     help: |
-        Isn't {{ project_name | slugify }} perfect for the project's directory name?
+        Let's keep the suggested project's directory name?
+
+           Isn't {{ project_name | slugify }} perfect for the project's directory name?
            Why we're suggestin this name?
            Convention over configuration.
            In this case the conventions are:
@@ -31,10 +36,10 @@ change_project_dir_name:
              - Keep it short and descriptive to make paths easier to type and understand.
              - Avoid special characters like `@`, `#`, `$`, or `&`. Stick to letters, numbers, and hyphens.
              - Choose a name that reflects your project's purpose or functionality.
-           Would you like to change it?
+           Would you like to use it?
     choices:
-        No, thanks: "no"
         Yes, please: "yes"
+        No, thanks: "no"
 
 project_dir_name:
     type: str
@@ -42,21 +47,23 @@ project_dir_name:
     help: |
         What's your project directory name?
     default: |-
-        {% if change_project_dir_name == 'no' -%}
+        {% if keep_project_dir_name == 'yes' -%}
             {{ project_name | slugify }}
         {%- else -%}
             {#- Ask user -#}
         {%- endif %}
-    when: "{{ change_project_dir_name != 'no' }}"
+    when: "{{ keep_project_dir_name == 'no' }}"
     validator: >-
         {% if not (project_dir_name | regex_search('^[a-z0-9\-]+$')) %}
         The project_dir_name must contains lowercase letters, digits or hyphens.
         {% endif %}
 
-change_project_scripts_dir_name:
+keep_project_scripts_dir_name:
     type: str
     help: |
-        Isn't {{ project_dir_name.replace('-', '_') }} perfect for the project script's directory name?
+        Let's keep the suggested project's scripts name?
+
+           Isn't {{ project_dir_name.replace('-', '_') }} perfect for the project script's directory name?
            Why we're suggestin this name?
            Convention over configuration.
            In this case the conventions are:
@@ -65,14 +72,16 @@ change_project_scripts_dir_name:
              - Keep it short and descriptive to make paths easier to type and understand.
              - Avoid special characters like `@`, `#`, `$`, or `&`. Stick to letters, numbers, and hyphens.
              - A name that reflects your project's directory name.
-           Would you like to change it?
+           Would you like to use it?
     choices:
-        No, thanks: "no"
         Yes, please: "yes"
+        No, thanks: "no"
 
 common_scripts_dir_name:
     type: str
     help: |
+        Let's select a common directory name for your scripts?
+
         Would you like to use a common directory name for your scripts, such as src, scripts, bin, or utils?
            These names are widely used in Python projects for organizing source code and utility scripts.
            You can select one of these or specify your own preferred directory name.
@@ -82,7 +91,7 @@ common_scripts_dir_name:
       src: "src"
       utils: "utils"
       No, I want to specify my own name: "no"
-    when: "{{ change_project_scripts_dir_name == 'yes' }}"
+    when: "{{ keep_project_scripts_dir_name == 'no' }}"
 
 
 project_scripts_dir_name:
@@ -91,7 +100,7 @@ project_scripts_dir_name:
     help: |
         What's your script's directory name?
     default: |-
-        {% if change_project_scripts_dir_name == 'no' -%}
+        {% if keep_project_scripts_dir_name == 'yes' -%}
             {{ project_dir_name.replace('-', '_') }}
         {% elif common_scripts_dir_name != 'no' -%}
             {{ common_scripts_dir_name }}

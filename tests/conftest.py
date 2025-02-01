@@ -9,8 +9,8 @@ def copier_project_defaults():
 
     return {
             'project_name': 'New Python project',
-            'change_project_dir_name': 'no',
-            'change_project_scripts_dir_name': 'no',
+            'keep_project_dir_name': 'yes',
+            'keep_project_scripts_dir_name': 'yes',
         }
 
 
