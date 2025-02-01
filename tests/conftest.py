@@ -35,7 +35,7 @@ def project_dir(project):
     project_parent_dir = project.project_dir
     project_parent_dir_structure = [folder for folder in project_parent_dir.glob('*')]
     project_path = project_parent_dir_structure[0]
-    project_path_structure = [file.name for file in project_path.glob('*')]
+    project_path_structure = [file.name.split('\n')[0] for file in project_path.glob('*')]
 
     return project_parent_dir, project_parent_dir_structure, project_path, \
         project_path_structure
