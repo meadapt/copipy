@@ -18,7 +18,15 @@ import pytest
     ('COPIPY', 'copipy'),
     ('Copipy', 'copipy'),
 ])
-def test_project_structure_createion(create_project, project_name, project_scripts_dir_name):
+def test_project_scripts_dir_creation(create_project, project_name, project_scripts_dir_name):
+    """
+    Test new project structure and the slugify process.
+    The `project_scripts_dir_name` variable must contains lowercase letters, digits or underscore.
+    If the  `change_project_scripts_dir_name` is 'no' it must use the  `slugify` filter provided by the
+    `cookiecutter.extensions.SlugifyExtension` Jinja extension and underscore not hyphen.
+    If the  `change_project_scripts_dir_name` is 'yes',
+    it could be one of the `common_scripts_dir_name` suggested or created by the user.
+    """
 
     project = create_project(overrides={'project_name': project_name})
     _project_dir = project_dir(project)

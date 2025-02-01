@@ -2,7 +2,7 @@ from tests.conftest import project_dir
 
 import pytest
 
-def test_readme_md_creation(create_project):
+def test_readme_creation(create_project):
     """
     Test new project creation with README.md file.
     """
@@ -28,7 +28,10 @@ def test_readme_md_creation(create_project):
     ('COPIPY'),
     ('Copipy'),
 ])
-def test_readme_me_content(create_project, project_name):
+def test_readme_content(create_project, project_name):
+    """
+    Test new project's README.md content.
+    """
 
     project = create_project(overrides={'project_name': project_name})
     _project_dir = project_dir(project)

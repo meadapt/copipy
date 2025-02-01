@@ -7,6 +7,7 @@ def test_project_dir_creation(create_project):
     """
     Test new project creation in general.
     """
+    
     project = create_project()
     _project_dir = project_dir(project)
     project_parent_dir_structure = _project_dir[1]
