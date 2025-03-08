@@ -4,7 +4,7 @@ import pytest
 
 @pytest.mark.parametrize('project_name, project_scripts_dir_name', [
     ('New Python project', 'new_python_project'),
-    ('1Meu Lindo Projeto', 'meu_lindo_projeto'),
+    ('1Meu Lindo Projeto', '1meu_lindo_projeto'),
     ('MEU LINDO PROJETO', 'meu_lindo_projeto'),
     ('meu-lindo-projeto', 'meu_lindo_projeto'),
     ('meu_lindo_projeto', 'meu_lindo_projeto'),
